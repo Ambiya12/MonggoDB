@@ -4,11 +4,11 @@ export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
     if (users.length < 1) {
-      return res.status(400).json("No users founde");
+      return res.status(404).json("No users founde");
     }
     return res.status(200).json(users);
   } catch (err) {
-    return res.status(400).json("Internal server error");
+    return res.status(500).json("Internal server error");
   }
 };
 
@@ -21,7 +21,7 @@ export const getUserbyID = async (req, res) => {
     }
     return res.status(200).json(userByID);
   } catch (err) {
-    return res.status(400).json("Internal server error");
+    return res.status(500).json("Internal server error");
   }
 };
 
@@ -32,7 +32,7 @@ export const createUser = async (req, res) => {
     const newUser = await User.create(req.body);
     return res.status(201).json(newUser);
   } catch (err) {
-    return res.status(400).json("Internal server error");
+    return res.status(500).json("Internal server error");
   }
 };
 
@@ -47,7 +47,7 @@ export const userUpdate = async (req, res) => {
     userByID.save();
     return res.json(userByID);
   } catch (err) {
-    return res.status(400).json("Internal server error");
+    return res.status(500).json("Internal server error");
   }
 };
 
@@ -60,6 +60,6 @@ export const deleteUser = async (req, res) => {
     }
     return res.json("User deleted successfully");
   } catch (err) {
-    return res.status(400).json("Internal server error");
+    return res.status(500).json("Internal server error");
   }
 };
